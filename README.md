@@ -20,11 +20,17 @@ Drop-in swap widget SDK for dApps integrating Tinyman. Contributed swap router v
 
 **[silkarthouse.com](https://silkarthouse.com)** — Next.js 15 editorial, commerce and NFT platform. Lead frontend, and sole engineer on the Node/Strapi backend. I built the EVM surface with wagmi, viem and ethers: Manifold auctions with live bid history, an IPFS pipeline via Pinata, and an artist dice experience running on a Manifold mint-extension contract wired to Chainlink VRF 2.5, where each rolled face mints to the collector's wallet and a complete set of 6,666 burns for an exclusive silver die. I also designed the caching and revalidation architecture behind a full static-to-CMS migration, and cut media delivery weight 78%.
 
-## Stats
+## Contributions
 
-Most of my commits land in private and organisation repositories, so these numbers count contributions you can't browse here.
+Most of my commits land in private and organisation repositories, so this counts work you can't browse here.
 
-<img src="github-metrics.svg" alt="GitHub metrics">
+- `tinymanorg/tinyman-web-client` — lead frontend
+- `tinymanorg/tinyman-js-sdk` — co-maintainer of the public SDK
+- `silkarthouse/silk-web` — lead frontend
+- `silkarthouse/silk-cms` — sole engineer
+- `silkarthouse/silk-ai` — in progress: an AI search engine specialised for art questions, built to integrate with Silk
+
+<img src="github-metrics.svg" alt="Notable contributions and language breakdown">
 
 ## Elsewhere
 
