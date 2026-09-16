@@ -1,12 +1,11 @@
 # .github/workflows/metrics.yml
-# Generates github-metrics.svg on a schedule and commits it back to this repo.
+# Renders github-metrics.svg and commits it back to this repo.
 #
 # Setup:
-#   1. Create a classic personal access token with the `repo` scope
-#      (add `read:org` if you want organisation contributions counted).
-#   2. Add it to this repository as a secret named METRICS_TOKEN.
-#   3. Settings > Actions > General > Workflow permissions: allow read and write.
-#   4. Run the workflow once manually to generate the first SVG.
+#   1. Classic personal access token with `repo` scope (add `read:org` for
+#      organisation contributions), stored as the secret METRICS_TOKEN.
+#   2. Settings > Actions > General > Workflow permissions: read and write.
+#   3. Actions tab > Metrics > Run workflow.
 
 name: Metrics
 
@@ -32,25 +31,30 @@ jobs:
           template: classic
           config_timezone: Europe/Madrid
 
-          # Panels
-          base: header, activity, community, repositories
-          repositories_affiliations: owner, collaborator, organization_member
+          # No base panels. The default header carries follower counts, and the
+          # community/repositories panels render stars, forks, packages and
+          # sponsors — all zero on a personal account whose work lives in org
+          # repos. Empty counters read worse than no counters.
+          base: ""
 
-          # Language breakdown, weighted by lines actually written
+          # Notable contributions: which repositories the commits actually
+          # went to. `repositories: yes` prints repo names rather than just
+          # the organisation; `indepth: yes` adds a per-repo commit count with
+          # a gauge showing your share of the total.
+          plugin_notable: yes
+          plugin_notable_repositories: yes
+          plugin_notable_indepth: yes
+          plugin_notable_from: all
+          plugin_notable_types: commit, pull_request
+          plugin_notable_self: yes
+
+          # Language split, measured by lines written rather than repo count.
           plugin_languages: yes
           plugin_languages_indepth: yes
           plugin_languages_details: bytes-size, percentage
-          plugin_languages_limit: 8
+          plugin_languages_limit: 6
           plugin_languages_sections: most-used
 
-          # Where the commits actually went
-          plugin_activity: yes
-          plugin_activity_limit: 5
-          plugin_activity_days: 30
-          plugin_activity_filter: issue, pr, release, push
-
-          # Public packages you maintain
-          plugin_projects: no
-          plugin_followup: no
-          plugin_lines: yes
-          plugin_lines_sections: base
+          # Match commits authored under a different git identity, otherwise
+          # indepth analysis silently attributes none of them to you.
+          commits_authoring: gulcinuras, gulcin_uras@hotmail.com, Gülçin Uras
